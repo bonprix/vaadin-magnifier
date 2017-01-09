@@ -30,9 +30,13 @@ public class DemoUI extends UI
     	   	
         // Initialize our new UI component
         final Magnifier magnifier = new Magnifier();
-        magnifier.setImageUrl("http://rfp.laudert.de/previews/assets/prev_l/9/3/3/3/1869333.jpg");
-        magnifier.setHeight(600, Unit.PIXELS);
-        magnifier.setWidth(400, Unit.PIXELS);
+        magnifier.setImageUrl("http://rfp.laudert.de/previews/assets/prev_m/9/3/3/3/1869333.jpg");
+        magnifier.setHeight(600, Unit.PIXELS); 
+        magnifier.setWidth(400, Unit.PIXELS);          
+        // OPTIONAL: Set the ZoomImageUrl
+        magnifier.setZoomImageUrl("http://rfp.laudert.de/previews/assets/prev_l/9/3/3/3/1869333.jpg");
+        // Set the ZoomFactor 
+        magnifier.setZoomFactor(1.5f);
 
         // Show it in the middle of the screen
         final VerticalLayout layout = new VerticalLayout();

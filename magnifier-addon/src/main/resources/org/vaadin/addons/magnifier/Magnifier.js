@@ -5,7 +5,9 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
     elem.itself = self;
     
     self.imageUrl = "";
-    self.zoomFactor = 1.5;
+    self.zoomImageUrl = "";
+    self.zoomFactor = 1;
+    
     // Configure Parent Member Fields
     //----------------------------------------------
 
@@ -23,7 +25,7 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
 		"width"               : "11em",
 		"border-radius"       : "50%",
 		"box-shadow"          : "3px 3px 5px #111",	
-        "background"          : 'url(' + self.imageUrl + ') no-repeat',	
+        "background"          : 'url(' + self.zoomImageUrl + ') no-repeat',	
         "display"             : "none",
         "margin"              : "0px 0px 0px 0px"
     });
@@ -57,7 +59,6 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
 
     		if (otherMagnifier != null) {
     			self.syncedMagnifier = otherMagnifier; // Setup the sync
-//    			otherMagnifier.syncedMagnifier = self; // Setup the sync the other way around
     		}
     	}
     };
@@ -101,21 +102,22 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
     }
     
     // Sets the image of the magnifier/image
-    this.setImageUrl = function(strImageUrl) {
+    this.setImageUrl = function(strImageUrl, strZoomImageUrl) {
     	self.imageUrl = strImageUrl;
+    	self.zoomImageUrl = strZoomImageUrl;
     	self.updateImage();
     }
     
     // Updates the src attributes of all elements that are using the image
     this.updateImage = function() {
-    	// Image
+    	// SmallImage
     	$(elem.smallImage).attr({
     		"src" : self.imageUrl
     	});
     	
-    	// Magnifier background
+    	// Magnifier background (ZoomImage)
     	$(elem.magnifier).css({
-            "background" : 'url(' + self.imageUrl + ') no-repeat',	
+            "background" : 'url(' + self.zoomImageUrl + ') no-repeat',	
         });
     }
     
@@ -154,7 +156,7 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
     //-----------------------------------------------------------
     this.onStateChange = function(e) {
     	var state = self.getState();
-    	self.setImageUrl(state.imageUrl);
+    	self.setImageUrl(state.imageUrl, state.zoomImageUrl);
     	self.syncedMagnifierId = state.syncedMagnifierId;
     	self.zoomFactor = state.zoomFactor;
     }
