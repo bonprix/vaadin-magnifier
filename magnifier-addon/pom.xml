@@ -28,24 +28,6 @@
 		<Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
 	</properties>
 
-    <!--
-	<organization>
-		<name>My Name</name>
-		<url>https://github.com/mygithubaccount/Magnifier/</url>
-	</organization>
-
-	<scm>
-		<url>git://github.com/mygithubaccount/Magnifier.git</url>
-		<connection>scm:git:git://github.com/mygithubaccount/Magnifier.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:/mygithubaccount/${componentClassName}.git</developerConnection>
-		<tag>Magnifier add-on for Vaadin</tag>
-	</scm>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/mygithubaccount/Magnifier/issues</url>
-	</issueManagement>
-    -->
 
 	<licenses>
 		<license>

@@ -21,24 +21,6 @@
 		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
 	</properties>
 
-    <!--
-	<organization>
-		<name>My Name</name>
-		<url>https://github.com/mygithubaccount/Magnifier/</url>
-	</organization>
-
-	<scm>
-		<url>git://github.com/mygithubaccount/Magnifier.git</url>
-		<connection>scm:git:git://github.com/mygithubaccount/Magnifier.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:/mygithubaccount/${componentClassName}.git</developerConnection>
-		<tag>Magnifier add-on for Vaadin</tag>
-	</scm>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/mygithubaccount/Magnifier/issues</url>
-	</issueManagement>
-    -->
 
 	<licenses>
 		<license>
@@ -109,10 +91,8 @@
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>${vaadin.plugin.version}</version>
 				<executions>
-					<!-- You are free to mark this as permanently ignored in Eclipse -->
 					<execution>
 						<configuration>
-							<!-- if you don't specify any modules, the plugin will find them -->
 						</configuration>
 						<goals>
 							<goal>resources</goal>
@@ -121,7 +101,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>			 
 
 			<!-- The Jetty plugin allows us to easily test the development build by -->
 			<!-- running jetty:run on the command line. -->

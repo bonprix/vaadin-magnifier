@@ -2,7 +2,6 @@ package org.vaadin.addons.magnifier;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.vaadin.addons.magnifier.client.MagnifierServerRpc;
 import org.vaadin.addons.magnifier.client.MagnifierState;
 
 import com.vaadin.annotations.JavaScript;
@@ -19,19 +18,6 @@ public class Magnifier extends AbstractJavaScriptComponent {
     private static AtomicLong INSTANCE_COUNT = new AtomicLong(0);
     private final long instanceId;
 
-    @SuppressWarnings("serial")
-    private final MagnifierServerRpc rpc = new MagnifierServerRpc() {
-
-        @Override
-        public void click(final String url, final boolean initialSelection) {
-            final int selection = getState(false).getImageUrl().indexOf(url);
-            
-            // Magnifier.this.selectedIndex = selection;
-            // if (!initialSelection) {
-            // fireEvent(new ImageSelectionEvent(Magnifier.this, url, selection));
-            // }
-        }
-    };
 
     /**
      * Creates a new magnifier widget with the given image URLs.
@@ -39,7 +25,6 @@ public class Magnifier extends AbstractJavaScriptComponent {
     public Magnifier() {
         this.instanceId = INSTANCE_COUNT.getAndIncrement();
         setId("magnifier-" + this.instanceId);
-        registerRpc(this.rpc);
     }
 
     /**
@@ -48,7 +33,7 @@ public class Magnifier extends AbstractJavaScriptComponent {
      * @param url the URL
      */
      public void setImageUrl(final String url) {
-        getState().setImageUrl(url);
+        getState().imageUrl = url;
      }
     
     /**
@@ -59,7 +44,7 @@ public class Magnifier extends AbstractJavaScriptComponent {
      * @param zoomImageUrl the URL
      */
     public void setZoomImageUrl(final String zoomImageUrl) {
-        getState().setZoomImageUrl(zoomImageUrl);
+        getState().zoomImageUrl = zoomImageUrl;
     }
     
     /** 
@@ -68,7 +53,7 @@ public class Magnifier extends AbstractJavaScriptComponent {
      * @param magnifier
      */
     public void syncWith(final Magnifier magnifier) {
-        getState().setSyncedMagnifierId("magnifier-" + magnifier.instanceId);
+        getState().syncedMagnifierId = "magnifier-" + magnifier.instanceId;
     }
 
     /**
@@ -81,7 +66,7 @@ public class Magnifier extends AbstractJavaScriptComponent {
         if (zoomFactor <= 0) {
             return;
         }
-        getState().setZoomFactor(zoomFactor);
+        getState().zoomFactor = zoomFactor;
     }
 
     public int getSelectedIndex() {

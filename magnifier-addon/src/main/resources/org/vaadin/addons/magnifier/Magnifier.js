@@ -1,12 +1,14 @@
 window.org_vaadin_addons_magnifier_Magnifier = function() {
-
-    var self = this;
+	
+	// Can't use "this" inside any function
+    var self = this; 
     var elem = self.getElement();  
     elem.itself = self;
     
     self.imageUrl = "";
     self.zoomImageUrl = "";
     self.zoomFactor = 1;
+    self.syncedMagnifierId = "";
     
     // Configure Parent Member Fields
     //----------------------------------------------
@@ -16,7 +18,7 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
         "position" : "relative",
         "cursor"   : "none",
         "width"  : "100%",
-        "height" : "100%",
+        "height" : "100%"
     });
       
     elem.magnifier = $("<div>").css({
@@ -37,7 +39,7 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
     	"margin-left"  : "auto", 
     	"margin-right" : "auto", 
         "max-width"    : "100%",
-        "max-height"   : "100%",        
+        "max-height"   : "100%"        
     });
 
     $(elem.magnifierContainer).append(elem.smallImage, elem.magnifier);
@@ -48,7 +50,6 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
     
     // Syncs this magnifier with another magnifier
     this.syncedMagnifier   = null;
-    this.syncedMagnifierId = '';
 
     // Because we cant influence when the elements are created by vaadin we have to
     // notice the id of the to-sync magnifier and constantly try to get an element by this
@@ -117,7 +118,7 @@ window.org_vaadin_addons_magnifier_Magnifier = function() {
     	
     	// Magnifier background (ZoomImage)
     	$(elem.magnifier).css({
-            "background" : 'url(' + self.zoomImageUrl + ') no-repeat',	
+            "background" : 'url(' + self.zoomImageUrl + ') no-repeat'	
         });
     }
     
