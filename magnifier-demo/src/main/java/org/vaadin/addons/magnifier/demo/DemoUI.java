@@ -1,6 +1,6 @@
 package org.vaadin.addons.magnifier.demo;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +27,8 @@ import com.vaadin.ui.VerticalLayout;
 public class DemoUI extends UI {
 
     private Magnifier magnifier = new Magnifier();
-    private List<ImageUrl> imageUrlList = null;
+    private static final List<ImageUrl> IMAGE_URLS = Arrays.asList(new ImageUrl("9/3/3/3/1869333.jpg"), new ImageUrl("4/6/1/3/12104613.jpg"),
+                                                                   new ImageUrl("4/6/1/3/15154613.jpg"));
 
     @WebServlet(
         value = "/*",
@@ -40,12 +41,6 @@ public class DemoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-
-        this.imageUrlList = new ArrayList<ImageUrl>();
-        this.imageUrlList.add(new ImageUrl("9/3/3/3/1869333.jpg"));
-        this.imageUrlList.add(new ImageUrl("4/6/1/3/12104613.jpg"));
-        this.imageUrlList.add(new ImageUrl("4/6/1/3/15154613.jpg"));
-        this.imageUrlList.add(new ImageUrl("4/6/1/3/15154613.jpg"));
 
         // Create Magnifier and set Size and ImageURL
         this.magnifier = new Magnifier();
@@ -62,7 +57,7 @@ public class DemoUI extends UI {
         boolean firstTime = true;
         Image image = null;
 
-        for (ImageUrl imageUrl : this.imageUrlList) {
+        for (ImageUrl imageUrl : this.IMAGE_URLS) {
             // Left side images
             image = new Image(null, new ExternalResource(imageUrl.getImageUrl()));
             image.setImmediate(true);
