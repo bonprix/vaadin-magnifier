@@ -26,7 +26,6 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class DemoUI extends UI {
 
-    private Magnifier magnifier = new Magnifier();
     private static final List<ImageUrl> IMAGE_URLS = Arrays.asList(new ImageUrl("9/3/3/3/1869333.jpg"), new ImageUrl("4/6/1/3/12104613.jpg"),
                                                                    new ImageUrl("4/6/1/3/15154613.jpg"));
 
@@ -40,51 +39,50 @@ public class DemoUI extends UI {
     }
 
     @Override
-    protected void init(VaadinRequest request) {
+    protected void init(final VaadinRequest request) {
 
         // Create Magnifier and set Size and ImageURL
-        this.magnifier = new Magnifier();
-        this.magnifier.setHeight(600, Unit.PIXELS);
-        this.magnifier.setWidth(400, Unit.PIXELS);
+        final Magnifier magnifier = new Magnifier();
+        magnifier.setHeight(600, Unit.PIXELS);
+        magnifier.setWidth(400, Unit.PIXELS);
         // Set the ZoomFactor
-        this.magnifier.setZoomFactor(1.5f);
+        magnifier.setZoomFactor(1.5f);
 
         // Left side Images
-        VerticalLayout imageLayout = new VerticalLayout();
+        final VerticalLayout imageLayout = new VerticalLayout();
         imageLayout.setMargin(true);
         imageLayout.setSpacing(true);
 
         boolean firstTime = true;
         Image image = null;
 
-        for (ImageUrl imageUrl : this.IMAGE_URLS) {
+        for (final ImageUrl imageUrl : DemoUI.IMAGE_URLS) {
             // Left side images
             image = new Image(null, new ExternalResource(imageUrl.getImageUrl()));
-            image.setImmediate(true);
             image.setHeight(300, Unit.PIXELS);
             image.setWidth(200, Unit.PIXELS);
             image.addClickListener((event) -> {
-                this.magnifier.setImageUrl(imageUrl.getImageUrl());
-                this.magnifier.setZoomImageUrl(imageUrl.getImageZoomUrl());
+                magnifier.setImageUrl(imageUrl.getImageUrl());
+                magnifier.setZoomImageUrl(imageUrl.getImageZoomUrl());
             });
             imageLayout.addComponents(image);
 
             // set default magnifier image
             if (firstTime) {
-                this.magnifier.setImageUrl(imageUrl.getImageUrl());
+                magnifier.setImageUrl(imageUrl.getImageUrl());
                 // OPTIONAL: Set the ZoomImageUrl
-                this.magnifier.setZoomImageUrl(imageUrl.getImageZoomUrl());
+                magnifier.setZoomImageUrl(imageUrl.getImageZoomUrl());
                 firstTime = false;
             }
         }
 
-        VerticalLayout magnifierLayout = new VerticalLayout();
+        final VerticalLayout magnifierLayout = new VerticalLayout();
         magnifierLayout.setStyleName("demoContentLayout");
         magnifierLayout.setSizeFull();
-        magnifierLayout.addComponent(this.magnifier);
-        magnifierLayout.setComponentAlignment(this.magnifier, Alignment.MIDDLE_CENTER);
+        magnifierLayout.addComponent(magnifier);
+        magnifierLayout.setComponentAlignment(magnifier, Alignment.MIDDLE_CENTER);
 
-        HorizontalSplitPanel hsplit = new HorizontalSplitPanel();
+        final HorizontalSplitPanel hsplit = new HorizontalSplitPanel();
         hsplit.setFirstComponent(imageLayout);
         hsplit.setSecondComponent(magnifierLayout);
 
